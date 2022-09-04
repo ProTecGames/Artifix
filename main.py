@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
             # music_dir = "G:\\Song"
 
-            music_dir = "C:\\Users\\GAURAV\\Music"
+            music_dir = "C:\\Users\\PRAKHAR\\Music"
 
             songs = os.listdir(music_dir)
 
@@ -208,7 +208,7 @@ if __name__ == '__main__':
             exit()
 
         elif "who made you" in query or "who created you" in query:
-            speak("I have been created by Gaurav.")
+            speak("I have been created by ProTec Games.")
 
         elif 'joke' in query:
             speak(pyjokes.get_joke())
@@ -238,7 +238,7 @@ if __name__ == '__main__':
 
         elif 'power point presentation' in query:
             speak("opening Power Point presentation")
-            power = r"C:\\Users\\yash\\Desktop\\IIt Project\\Presentation\\Artifix.pptx"
+            power = r"C:\\Users\\PRAKHAR\\Desktop\\IIt Project\\Presentation\\Artifix.pptx"
             os.startfile(power)
 
         elif 'is love' in query:
@@ -287,7 +287,7 @@ if __name__ == '__main__':
             ctypes.windll.user32.LockWorkStation()
 
         elif 'shutdown system' in query:
-            speak("Hold On a Sec ! Your system is on its way to shut down")
+            speak("Hold On a Secound ! Your system is on its way to shut down")
             subprocess.call('shutdown / p /f')
 
         elif 'empty recycle bin' in query:
@@ -295,7 +295,7 @@ if __name__ == '__main__':
             speak("Recycle Bin Recycled")
 
         elif "don't listen" in query or "stop listening" in query:
-            speak("for how much time you want to stop jarvis from listening commands")
+            speak("for how much time you want to stop Artifix from listening commands")
             a = int(takeCommand())
             time.sleep(a)
             print(a)
@@ -308,7 +308,7 @@ if __name__ == '__main__':
             webbrowser.open("https://www.google.nl / maps / place/" + location + "")
 
         elif "camera" in query or "take a photo" in query:
-            ec.capture(0, "Jarvis Camera ", "img.jpg")
+            ec.capture(0, "Artifix Camera ", "img.jpg")
 
         elif "restart" in query:
             subprocess.call(["shutdown", "/r"])
@@ -338,7 +338,7 @@ if __name__ == '__main__':
 
         elif "show note" in query:
             speak("Showing Notes")
-            file = open("jarvis.txt", "r")
+            file = open("artifix.txt", "r")
             print(file.read())
             speak(file.read(6))
 

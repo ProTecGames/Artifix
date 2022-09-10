@@ -16,9 +16,16 @@ This project is been made for all is available on GitHub open-source you can <b>
 <summary>3 SEP 2020 </summary>
   <p>Created GitHUb Repository </p>
 </details>
+
 <details>
 <summary>4 SEP 2020 </summary>
   <p>Artifix Version 1.0 available on GitHub with source code</p>
+</details>
+<details>
+<summary>10 SEP 2020 </summary>
+  <p>Major updates like in-built Notepad, new commands added and big fix.
+Assistant now can show list of connected Wi-Fi to a device till date, Can play music directly on YouTube, Open any installed application, tell date and time, tell current battery left status, removed <pre> What's your name </pre> question to make use easy and fast
+</p>
 </details>
 
 <!-- timeline end -->

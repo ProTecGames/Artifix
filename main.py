@@ -1,30 +1,29 @@
+from tkinter import *
 import subprocess
-import wolframalpha
-import pyttsx3
-import tkinter
-import json
-import random
-import operator
-import speech_recognition as sr
-import datetime
-import wikipedia
-import webbrowser
-import os
-import winshell
-import pyjokes
-import feedparser
-import smtplib
+import psutil
 import ctypes
-import time
-import requests
+import datetime
+import json
+import os
 import shutil
-from twilio.rest import Client
+import smtplib
+import subprocess
+import time
+import webbrowser
+from urllib.request import urlopen
+import pywhatkit
+from AppOpener import run
+import pyjokes
+import pyttsx3
+import requests
+import speech_recognition as sr
+import wikipedia
+import winshell
+import wolframalpha
+from datetime import date
 from clint.textui import progress
 from ecapture import ecapture as ec
-from bs4 import BeautifulSoup
-import win32com.client as wincl
-from urllib.request import urlopen
-
+from twilio.rest import Client
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -51,20 +50,10 @@ def wishMe():
     assname = ("Artifix")
     speak("I am your Assistant")
     speak(assname)
+    speak("tell me how can i help you")
 
 
-def username():
-    speak("What should i call you sir")
-    uname = takeCommand()
-    speak("Welcome Mister")
-    speak(uname)
-    columns = shutil.get_terminal_size().columns
 
-    print("#####################".center(columns))
-    print("Welcome Mr.", uname.center(columns))
-    print("#####################".center(columns))
-
-    speak("How can i Help you, Sir")
 
 
 def takeCommand():
@@ -94,8 +83,8 @@ def sendEmail(to, content):
     server.starttls()
 
     # Enable low security in gmail
-    server.login('email@protecgames.com', 'Password_Of_Email')
-    server.sendmail('email@protecgames.com, to, content')
+    server.login('email@gmail.com', 'Password_Of_Email')
+    server.sendmail('Receivers_email@email.com, to, content')
     server.close()
 
 
@@ -106,7 +95,7 @@ if __name__ == '__main__':
     # command before execution of this python file
     clear()
     wishMe()
-    username()
+
 
     while True:
 
@@ -123,52 +112,48 @@ if __name__ == '__main__':
             speak("According to Wikipedia")
             print(results)
             speak(results)
+        elif 'play' in query:
+                song = query.replace('play', '')
+                speak('playing ' + song)
+                pywhatkit.playonyt(song)
 
         elif 'open youtube' in query:
             speak("Here you go to Youtube\n")
             webbrowser.open("youtube.com")
 
-        elif 'open google' in query:
+        elif "google" in query or "search google" in query:
             speak("Here you go to Google\n")
-            webbrowser.open("google.com")
+            webbrowser.open_new("google.com")
 
-        elif 'open stackoverflow' in query:
+        elif 'stackoverflow' in query:
             speak("Here you go to Stack Over flow.Happy coding")
-            webbrowser.open("stackoverflow.com")
+            webbrowser.open_new("stackoverflow.com")
 
 
-        elif 'play music' in query or "play song" in query:
 
-            speak("Here you go with music")
 
-            # music_dir = "G:\\Song"
+        elif 'search app' in query:
 
-            music_dir = "C:\\Users\\PRAKHAR\\Music"
+                speak("enter app name")
+                # taking input
+                inp = input("ENTER APPLICATION TO OPEN: ").strip()
+                # check if there is input
+                if input:
+                    run(inp)
+                    speak("Opening plaese wait")
+        elif 'the date' in query:
+            today = date.today()
+            speak(today)
+            print(today)
+        elif 'battery' in query:
+            def convertTime(seconds):
+                minutes, seconds = divmod(seconds, 60)
+                hours, minutes = divmod(minutes, 60)
+                return "%d:%02d:%02d" % (hours, minutes, seconds)
+            battery = psutil.sensors_battery()
+            speak("present left battery is")
+            speak(battery.percent)
 
-            songs = os.listdir(music_dir)
-
-            print(songs)
-
-            random = os.startfile(os.path.join(music_dir, songs[1]))
-
-        elif 'the time' in query:
-            strTime = datetime.datetime.now().strftime("% H:% M:% S")
-            speak(f"Sir, the time is {strTime}")
-
-        elif 'open edge' in query:
-            codePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-            os.startfile(codePath)
-
-        elif 'email to developer' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                to = "person to whome you send @email.in"
-                sendEmail(to, content)
-                speak("Email has been sent !")
-            except Exception as e:
-                print(e)
-                speak("I am not able to send this email")
 
         elif 'send a mail' in query:
             try:
@@ -181,6 +166,8 @@ if __name__ == '__main__':
             except Exception as e:
                 print(e)
                 speak("I am not able to send this email")
+
+
 
         elif 'how are you' in query:
             speak("I am fine, Thank you")
@@ -215,7 +202,7 @@ if __name__ == '__main__':
 
         elif "calculate" in query:
 
-            app_id = "Wolframalpha api id"
+            app_id = "Enter your app id here"
             client = wolframalpha.Client(app_id)
             indx = query.lower().split().index('calculate')
             query = query.split()[indx + 1:]
@@ -236,13 +223,49 @@ if __name__ == '__main__':
         elif "why you came to world" in query:
             speak("Thanks to ProTec Games. further It's a secret")
 
-        elif 'power point presentation' in query:
-            speak("opening Power Point presentation")
-            power = r"C:\\Users\\PRAKHAR\\Desktop\\IIt Project\\Presentation\\Artifix.pptx"
-            os.startfile(power)
+        elif 'wi-fi connected list' in query:
+            speak("please wait collecting data")
+            # getting meta data of the wifi network
+            meta_data = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles'])
+
+            # decoding meta data from byte to string
+            data = meta_data.decode('utf-8', errors="backslashreplace")
+
+            # splitting data by line by line
+            # string to list
+            data = data.split('\n')
+
+            # creating a list of wifi names
+            names = []
+
+            # traverse the list
+            for i in data:
+
+                # find "All User Profile" in each item
+                # as this item will have the wifi name
+                if "All User Profile" in i:
+                    # if found split the item
+                    # in order to get only the name
+                    i = i.split(":")
+
+                    # item at index 1 will be the wifi name
+                    i = i[1]
+
+                    # formatting the name
+                    # first and last chracter is use less
+                    i = i[1:-1]
+
+                    # appending the wifi name in the list
+                    names.append(i)
+
+            # printing the wifi names
+            print("All wifi that system has connected to are ")
+            print("-----------------------------------------")
+            for name in names:
+                print(name)
 
         elif 'is love' in query:
-            speak("It is 7th sense that destroy all other senses")
+            speak("A feeling that can not be expressed but can be felt")
 
         elif "who are you" in query:
             speak("I am your virtual assistant created by ProTec Games")
@@ -250,12 +273,29 @@ if __name__ == '__main__':
         elif 'reason for you' in query:
             speak("I was created as a Minor project by Mister ProTec Games ")
 
-        elif 'change background' in query:
-            ctypes.windll.user32.SystemParametersInfoW(20,
-                                                       0,
-                                                       "Location of wallpaper",
-                                                       0)
-            speak("Background changed successfully")
+        elif 'open text editor' in query:
+            speak("opening text editor")
+            root = Tk()
+            root.geometry("350x250")
+            root.title("Artifix Notes")
+            root.minsize(height=250, width=350)
+            root.maxsize(height=250, width=350)
+
+            # adding scrollbar
+            scrollbar = Scrollbar(root)
+
+            # packing scrollbar
+            scrollbar.pack(side=RIGHT,
+                           fill=Y)
+
+            text_info = Text(root,
+                             yscrollcommand=scrollbar.set)
+            text_info.pack(fill=BOTH)
+
+            # configuring the scrollbar
+            scrollbar.config(command=text_info.yview)
+
+            root.mainloop()
 
         elif 'open bluestack' in query:
             appli = r"C:\\ProgramData\\BlueStacks\\Client\\Bluestacks.exe"
@@ -367,7 +407,7 @@ if __name__ == '__main__':
 
             # Google Open weather website
             # to get API of Open weather
-            api_key = "Api key"
+            api_key = "enter api key"
             base_url = "http://api.openweathermap.org / data / 2.5 / weather?"
             speak(" City name ")
             print("City name : ")
@@ -391,20 +431,9 @@ if __name__ == '__main__':
             else:
                 speak(" City Not Found ")
 
-        elif "send message " in query:
-            # You need to create an account on Twilio to use this service
-            account_sid = 'Account Sid key'
-            auth_token = 'Auth token'
-            client = Client(account_sid, auth_token)
 
-            message = client.messages \
-                .create(
-                body=takeCommand(),
-                from_='Sender No',
-                to='Receiver No'
-            )
 
-            print(message.sid)
+
 
         elif "wikipedia" in query:
             webbrowser.open("wikipedia.com")
@@ -419,16 +448,18 @@ if __name__ == '__main__':
             speak("I'm not sure about, may be you should give me some time")
 
         elif "how are you" in query:
+
             speak("I'm fine, glad you me that")
 
-        elif "i love you" in query:
-            speak("It's hard to understand")
+        elif "my music" in query:
+            speak("searching music")
 
         elif "what is" in query or "who is" in query:
 
             # Use the same API key
             # that we have generated earlier
-            client = wolframalpha.Client("API_ID")
+
+            client = wolframalpha.Client("reuse same id")
             res = client.query(query)
 
             try:
@@ -436,7 +467,5 @@ if __name__ == '__main__':
                 speak(next(res.results).text)
             except StopIteration:
                 print("No results")
-
-    # elif "" in query:
-    # Command go here
-    # For adding more commands
+            else:
+                speak("")

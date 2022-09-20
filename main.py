@@ -1,9 +1,10 @@
 from tkinter import *
-import subprocess
+from email.message import EmailMessage
 import psutil
 import ctypes
 import datetime
 import json
+import speedtest
 import os
 import shutil
 import smtplib
@@ -23,7 +24,7 @@ import wolframalpha
 from datetime import date
 from clint.textui import progress
 from ecapture import ecapture as ec
-from twilio.rest import Client
+
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -31,7 +32,7 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
 
-def speak(audio):
+def speak(audio: object) -> object:
     engine.say(audio)
     engine.runAndWait()
 
@@ -77,15 +78,7 @@ def takeCommand():
 
     return query
 
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
 
-    # Enable low security in gmail
-    server.login('email@gmail.com', 'Password_Of_Email')
-    server.sendmail('Receivers_email@email.com, to, content')
-    server.close()
 
 
 if __name__ == '__main__':
@@ -140,7 +133,7 @@ if __name__ == '__main__':
                 # check if there is input
                 if input:
                     run(inp)
-                    speak("Opening plaese wait")
+                    speak("Opening please wait")
         elif 'the date' in query:
             today = date.today()
             speak(today)
@@ -154,24 +147,11 @@ if __name__ == '__main__':
             speak("present left battery is")
             speak(battery.percent)
 
-
-        elif 'send a mail' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                speak("whome should i send")
-                to = input()
-                sendEmail(to, content)
-                speak("Email has been sent !")
-            except Exception as e:
-                print(e)
-                speak("I am not able to send this email")
-
-
-
         elif 'how are you' in query:
             speak("I am fine, Thank you")
             speak("How are you, Sir")
+
+
 
         elif 'fine' in query or "good" in query:
             speak("It's good to know that your fine")
@@ -202,7 +182,7 @@ if __name__ == '__main__':
 
         elif "calculate" in query:
 
-            app_id = "Enter your app id here"
+            app_id = "QGTETJ-2GGPV6AJU4"
             client = wolframalpha.Client(app_id)
             indx = query.lower().split().index('calculate')
             query = query.split()[indx + 1:]
@@ -451,15 +431,19 @@ if __name__ == '__main__':
 
             speak("I'm fine, glad you me that")
 
-        elif "my music" in query:
-            speak("searching music")
+        elif "internet speed" in query:
+            wifi = speedtest.Speedtest()
+            speak("checking your internet speed please wait it can take some time")
+            print("Wifi Download Speed is ", wifi.download())
+            print("Wifi Upload Speed is ", wifi.upload())
+
 
         elif "what is" in query or "who is" in query:
 
-            # Use the same API key
+            # have to use same api again
             # that we have generated earlier
 
-            client = wolframalpha.Client("reuse same id")
+            client = wolframalpha.Client("QGTETJ-2GGPV6AJU4")
             res = client.query(query)
 
             try:

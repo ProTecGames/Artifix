@@ -4,7 +4,9 @@
 <a href="https://www.imgbly.com/ib/t1slNEgDpa"><img src="https://www.imgbly.com/ib/t1slNEgDpa.png" alt="t1slNEgDpa"/></a>
 <br><br>
 This project is been made for all is available on GitHub open-source you can <b> Fork </b> it to use for personal use or to modify it <B>ONLY</b>
-
+<br><br> 
+ <a href="https://bit.ly/artifix" target="blank">Download App v1.0 BETA test 1 </a>(Based on Windows OS)
+ <br><br>
 <h1> Projects Timeline </h1><br>
 <!-- timeline starts -->
 
@@ -28,9 +30,10 @@ Assistant now can show list of connected Wi-Fi to a device till date, Can play m
 </p>
 </details>
 <details>
-<summary>17 OCt 2020 </summary>
+<summary>17 OCT 2020 </summary>
   <p>Introduced first PC app BETA version can have bugs
-</p>
+</p><br><br>
+  <a href="https://bit.ly/artifix" target="blank">Download App v1.0 BETA test 1 </a>(Based on Windows OS)
 </details>
 
 <!-- timeline end -->

@@ -27,6 +27,11 @@ This project is been made for all is available on GitHub open-source you can <b>
 Assistant now can show list of connected Wi-Fi to a device till date, Can play music directly on YouTube, Open any installed application, tell date and time, tell current battery left status, removed <pre> What's your name </pre> question to make use easy and fast
 </p>
 </details>
+<details>
+<summary>17 OCt 2020 </summary>
+  <p>Introduced first PC app BETA version can have bugs
+</p>
+</details>
 
 <!-- timeline end -->
 

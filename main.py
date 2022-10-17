@@ -28,7 +28,6 @@ from ecapture import ecapture as ec
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-# print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
 
 
@@ -84,8 +83,6 @@ def takeCommand():
 if __name__ == '__main__':
     clear = lambda: os.system('cls')
 
-    # This Function will clean any
-    # command before execution of this python file
     clear()
     wishMe()
 
@@ -94,10 +91,7 @@ if __name__ == '__main__':
 
         query = takeCommand().lower()
 
-        # All the commands said by user will be
-        # stored here in 'query' and will be
-        # converted to lower case for easily
-        # recognition of command
+
         if 'wikipedia' in query:
             speak('Searching Wikipedia...')
             query = query.replace("wikipedia", "")
@@ -170,9 +164,38 @@ if __name__ == '__main__':
             speak(assname)
             print("My friends call me", assname)
 
+        elif "who are developers" in query:
+            speak("developers are the people who are capable of changing this world")
+            print("Developers are the people who are capable of changing this world")
+
+        elif "is god" in query:
+            speak("i don't know where or who is god for me the person who has given me life because of whome i can talk understand others is god")
+            print("I don't know where or who is god for me the person who has given me life because of whome i can talk understand others is god :-)")
+
+
         elif 'exit' in query:
             speak("Thanks for giving me your time")
             exit()
+
+        elif "tell me about yourself" in query:
+            speak("Artifix is a python based artificial assistant made by ProTec Games in the year 2022. I am a part of project that is to be submitted to I.I.T mumbai e cell")
+            print("Artifix is a python based artificial assistant made by ProTec Games in the year 2022. I am a part of project that is to be submitted to I.I.T mumbai e-cell")
+
+        elif "unique in you" in query or "unique about you" in query:
+            speak("I can calculate your internet speed, i can make tweet, i can chat, i can do almost evrything as that of a high tech robot")
+            print("I can calculate your internet speed, I can make tweet, I can chat, I can do almost everything as that of a high tech robot")
+
+        elif "like coding" in query:
+            speak("I like coding becuase coding is a art that can make dreams come to reality")
+            print("I like coding because Coding is a art that can make dreams come to reality")
+
+        elif "something about developer" in query:
+            speak("My developer is prakhar doneria.he has made me to make this world a better in I.t. sector. my developers keep working hard to give me new features everyday so that i can be more productive to our users")
+            print("My developer is prakhar doneria. He has made me to make this world a better in I.T. sector. My developers keep working hard to give me new features everyday so that I can be more productive to our users")
+
+        elif "kill humans" in query or "kill us" in query or "kill me" in query:
+            speak("i don't think so technology is been made for helping humans not destroying them. it's the human who stars using it in negative way like the nuclear power.for me asking such questions is useless because our control is in under humans only we can't even work without humans then how can we kill you. after all a chaild can't go againt the parents")
+            print("I don't think so technology is been made for helping humans not destroying them. It's the human who stars using it in negative way like the nuclear power.For me asking such questions is useless because our control is in under humans only we can't even work without humans then how can we kill you. After all a chaild can't go againt the parents")
 
         elif "who made you" in query or "who created you" in query:
             speak("I have been created by ProTec Games.")
@@ -261,10 +284,8 @@ if __name__ == '__main__':
             root.minsize(height=250, width=350)
             root.maxsize(height=250, width=350)
 
-            # adding scrollbar
             scrollbar = Scrollbar(root)
 
-            # packing scrollbar
             scrollbar.pack(side=RIGHT,
                            fill=Y)
 
@@ -272,7 +293,6 @@ if __name__ == '__main__':
                              yscrollcommand=scrollbar.set)
             text_info.pack(fill=BOTH)
 
-            # configuring the scrollbar
             scrollbar.config(command=text_info.yview)
 
             root.mainloop()
@@ -376,7 +396,6 @@ if __name__ == '__main__':
                     if ch:
                         Pypdf.write(ch)
 
-        # NPPR9-FWDCX-D2C8J-H872K-2YT43
         elif "artifix" in query:
 
             wishMe()
@@ -385,8 +404,6 @@ if __name__ == '__main__':
 
         elif "weather" in query:
 
-            # Google Open weather website
-            # to get API of Open weather
             api_key = "enter api key"
             base_url = "http://api.openweathermap.org / data / 2.5 / weather?"
             speak(" City name ")
@@ -411,10 +428,6 @@ if __name__ == '__main__':
             else:
                 speak(" City Not Found ")
 
-
-
-
-
         elif "wikipedia" in query:
             webbrowser.open("wikipedia.com")
 
@@ -422,8 +435,7 @@ if __name__ == '__main__':
             speak("A warm" + query)
             speak("How are you Mister")
             speak(assname)
-
-        # most asked question from google Assistant
+#question asked from google assistant
         elif "will you be my gf" in query or "will you be my bf" in query:
             speak("I'm not sure about, may be you should give me some time")
 
@@ -439,9 +451,6 @@ if __name__ == '__main__':
 
 
         elif "what is" in query or "who is" in query:
-
-            # have to use same api again
-            # that we have generated earlier
 
             client = wolframalpha.Client("QGTETJ-2GGPV6AJU4")
             res = client.query(query)
